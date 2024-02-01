@@ -1,0 +1,75 @@
+import { useState } from "react"
+import bg from '../assets/images/recieption.jpg';
+import restaurant from '../assets/images/restaurant.avif';
+import gym from '../assets/images/gym.avif';
+import sports from '../assets/images/sports.jpg';
+import pick from '../assets/images/pick.jpg';
+
+function RoomFacilities() {
+   const [selectedFacility, setSelectedFacility]= useState(null)
+
+   const facilities =[
+    {id:1, image:restaurant, description:{class:'WORLD CLASS', title:'RESTAURANT & BANQUETS', details: 'Semper ac dolor vitae accumsan. Cras interdum hendrerit lacinia. Phasellus accumsan urna vitae molestie interdum. Nam sed placerat libero, non eleifend dolor,Cras ac justo et augue suscipit euismod vel eget lectus. Proin vehicula nunc arcu, pulvinar accumsan nulla porta vel. Vivamus malesuada vitae sem ac pellentesque.', serviceHour:'19:00-22:00', serviceCharge:15}},
+    {id:2, image:gym, description:{class:'WORLD CLASS', title:'GYM', details: 'Semper ac dolor vitae accumsan. Cras interdum hendrerit lacinia. Phasellus accumsan urna vitae molestie interdum. Nam sed placerat libero, non eleifend dolor,Cras ac justo et augue suscipit euismod vel eget lectus. Proin vehicula nunc arcu, pulvinar accumsan nulla porta vel. Vivamus malesuada vitae sem ac pellentesque.', serviceHour:'19:00-22:00', serviceCharge:15}},
+    {id:3, image:sports, description:{class:'WORLD CLASS', title:'SPORTS CLUB', details: 'Semper ac dolor vitae accumsan. Cras interdum hendrerit lacinia. Phasellus accumsan urna vitae molestie interdum. Nam sed placerat libero, non eleifend dolor,Cras ac justo et augue suscipit euismod vel eget lectus. Proin vehicula nunc arcu, pulvinar accumsan nulla porta vel. Vivamus malesuada vitae sem ac pellentesque.', serviceHour:'19:00-22:00', serviceCharge:15}},
+    {id:4, image:pick, description:{class:'WORLD CLASS', title:'PICK UP', details: 'Semper ac dolor vitae accumsan. Cras interdum hendrerit lacinia. Phasellus accumsan urna vitae molestie interdum. Nam sed placerat libero, non eleifend dolor,Cras ac justo et augue suscipit euismod vel eget lectus. Proin vehicula nunc arcu, pulvinar accumsan nulla porta vel. Vivamus malesuada vitae sem ac pellentesque.', serviceHour:'19:00-22:00', serviceCharge:15}},
+   ]
+   const handleFacility=(id)=>{
+        setSelectedFacility(id)
+   }
+  return (
+    <div className="relative min-h-screen flex">
+{/*     
+    <div
+      className="absolute inset-0 bg-cover bg-center bg-[url('../assets/images/recieption.jpg')]"
+      
+    ></div> */}
+
+    
+    <div className="flex items-center justify-center w-1/4 bg-gray-800 bg-opacity-75 text-white">
+      <ul>
+        {facilities.map((facility) => (
+          <li
+            key={facility.id}
+            className={`cursor-pointer p-4 ${
+              selectedFacility === facility.id ? 'bg-blue-500' : 'hover:bg-blue-400'
+            }`}
+            onClick={() => handleFacility(facility.id)}
+          >
+            {facility.title}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+   
+    {selectedFacility !== null && (
+      <div className="flex-1 p-8">
+        <div className="flex items-center justify-between mb-4">
+          
+          <img
+            src={facilities[selectedFacility - 1].image}
+            alt='image'
+            className="w-1/2 h-auto mr-4"
+          />
+
+          
+          <div className="w-1/2">
+            <h4 className="text-2xl font-semibold mb-2">{facilities[selectedFacility - 1].description.class}</h4>
+            <h4 className="text-3xl font-semibold mb-2">{facilities[selectedFacility - 1].description.title}</h4>
+            <p>{facilities[selectedFacility - 1].description.details}</p>
+            <div className="flex justify-between items-center">
+            <p>{facilities[selectedFacility - 1].description.serviceHour}</p>
+            <p>{facilities[selectedFacility - 1].description.serviceCharge}</p>
+            </div>
+          </div>
+        </div>
+
+      
+      </div>
+    )}
+  </div>
+  )
+}
+
+export default RoomFacilities
