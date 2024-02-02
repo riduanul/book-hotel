@@ -18,6 +18,8 @@ const toggleMobileMenu = ()=>{
           <a href="/" className="">Home</a>
           <a href="/" className="">Rooms</a>
           <a href="/" className="">Profile</a>
+          <a href="/login" className="">Login</a>
+          <a href="/register" className="">Register</a>
       </div>
       {/* mobile view */}
       <div className="md:hidden">

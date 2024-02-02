@@ -18,8 +18,8 @@ function RoomFacilities() {
         setSelectedFacility(id)
    }
   return (
-    <div className="my-[100px] min-h-screen py-5" style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', position:'sticky' }}>
-        <h1 className="text-xl md:text-3xl font-semibold py-[50px] text-center">HOTEL FACILITIES </h1>
+    <div className="my-[100px] min-h-screen py-5" style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition:'fixed' }}>
+      <h1 className="text-xl md:text-3xl font-semibold py-[50px] text-center">HOTEL FACILITIES </h1>
     <div className="relative p-[20px] mb-[100px] md:w-[80%] mx-auto bg-white" >
         <div className="flex flex-col md:flex-row items-center justify-center pt-5" >
       
@@ -51,7 +51,7 @@ function RoomFacilities() {
 
           
           <div className="w-1/2">
-            <h4 className="text-xl text-center md:text-left font-bold mb-2">{facilities[selectedFacility - 1].description.class}</h4>
+            <h4 className="text-xl text-center md:text-left font-semibold mb-2 text-gray-400">{facilities[selectedFacility - 1].description.class}</h4>
             <h4 className="text-3xl  text-center md:text-left font-semibold mb-2">{facilities[selectedFacility - 1].description.title}</h4>
             <p className="mt-[40px]  text-center md:text-left ">{facilities[selectedFacility - 1].description.details}</p>
             <div className="flex flex-col md:flex-row justify-between items-center mt-8">
@@ -65,7 +65,8 @@ function RoomFacilities() {
       
       </div>
     )}
-  </div>
+    </div>
+
   </div>
   )
 }

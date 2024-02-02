@@ -1,6 +1,7 @@
 import Slide from '../components/slide.jsx';
 import Room from '../pages/RoomList';
 import RoomFacilities from '../components/RoomFacilities.jsx';
+import AboutUs from '../components/AboutUs.jsx';
 function Home() {
  
   return (
@@ -8,6 +9,7 @@ function Home() {
       <Slide />
       <Room />
       <RoomFacilities />
+      <AboutUs />
     </div>
   )
 }
