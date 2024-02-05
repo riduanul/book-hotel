@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -7,6 +8,31 @@ const [isMobileOpen, setIsMobileOpen] = useState(false);
 
 const toggleMobileMenu = ()=>{
   setIsMobileOpen(!isMobileOpen);
+}
+const navigate = useNavigate()
+const handleLogout= async()=>{
+  try{
+    console.log('clicked')
+    const response = await fetch(`http://127.0.0.1:8000/api/v1/users/logout/`, {
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `{${localStorage.getItem('token')}, ${localStorage.getItem('user_id')}`
+      }
+    })
+    if(response.ok){
+      console.log('clicked')
+      localStorage.removeItem('token')
+      localStorage.removeItem('user_id')
+      console.log('logout successful');
+      navigate('/login');
+    }else{
+      console.log('clicked')
+      console.error('error:', response.status, response.statusText)
+    }
+  }catch(err){
+      console.log(err)
+    }
 }
 
   return (
@@ -19,6 +45,7 @@ const toggleMobileMenu = ()=>{
           <a href="/" className="">Rooms</a>
           <a href="/" className="">Profile</a>
           <a href="/login" className="">Login</a>
+          <button onClick={handleLogout} className="">Logout</button>
           <a href="/register" className="">Register</a>
       </div>
       {/* mobile view */}

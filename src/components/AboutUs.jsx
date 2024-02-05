@@ -1,11 +1,11 @@
 import contact from '../assets/images/contact-removebg-preview.png'
-import { FaLocationArrow, FaPhone, FaMailBulk, FaGoogle, FaFacebook, FaYoutube, FaLinkedin} from 'react-icons/fa';
+// import { FaLocationArrow, FaPhone, FaMailBulk, FaGoogle, FaFacebook, FaYoutube, FaLinkedin} from 'react-icons/fa';
 function AboutUs() {
   return (
    <div className="bg-gradient-to-r from-sky-500 to-sky-600">
     <div className="container mb-[50px] w-[80%] mx-auto leading-loose">
-        <h1 className='text-center text-xl; md:text-4xl p-5 font-semibold text-gray-800'>Contact Us</h1>
-    <div className="flex flex-col md:flex-row justify-center items-center gap-5">
+        <h1 className='text-center text-xl; md:text-4xl p-5 font-semibold text-gray-600'>Contact Us</h1>
+    <div className="flex flex-cols md:flex-row justify-center items-center gap-5">
     <div className="max-w-md mx-auto bg-white p-8 rounded-md shadow-md mt-4 bg-gradient-to-r from-sky-500 to-sky-600 ">
       <h2 className="text-2xl font-semibold mb-4 text-gray-600">Send Us Mail</h2>
 
@@ -80,7 +80,7 @@ function AboutUs() {
 
         <button
           type="submit"
-          className="w-full bg-sky-800 text-white p-2 rounded-md hover:bg-sky-600"
+          className="w-full bg-gradient-to-r from-sky-600 to-yellow-500 text-white p-2 rounded-md hover:bg-yellow-600"
         >
           Send
         </button>

@@ -2,10 +2,14 @@ import deluxe from '../assets/images/delux.avif';
 import single from '../assets/images/single.jpg';
 import double from '../assets/images/doble.jpg';
 import kids from '../assets/images/kids.jpg';
+import { Link } from 'react-router-dom';
+
+
 function RoomList() {
   return (
     <div className='w-[90%] mx-auto mt-[100px]'>
       <h1 className="text-xl md:text-3xl  text-center font-semibold">WELCOME TO HOTEL</h1>
+      
       <p className="text-gray-500 text-center w-[60%] mx-auto mb-[50px]">Lorem, ipsum dolor sit amet s rerum. Cum, provident laborum eligendi reiciendis ratione voluptates? Temporibus, dicta.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  
@@ -17,7 +21,12 @@ function RoomList() {
           />
           <div className="flex justify-between">
             <h2 className="text-lg font-semibold mb-2">Deluxe</h2>
-            <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-0  rounded-md">Book</button>
+            <Link to={{
+              pathname: `room/type/${'Deluxe'}`,
+             
+            }}>
+            <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2  rounded-md">See More</button>
+            </Link>
           </div>
           <p className="text-gray-600 mb-2">Price: $1000/night</p>
         </div>
@@ -29,7 +38,11 @@ function RoomList() {
           />
           <div className="flex justify-between">
             <h2 className="text-lg font-semibold mb-2">Double Room</h2>
-            <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-0  rounded-md">Book</button>
+            <Link to={{
+                pathname: `room/type/${'Double'}`,
+            }}>
+            <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2  rounded-md">See More</button>
+            </Link>
           </div>
           <p className="text-gray-600 mb-2">Price: $800/night</p>
         </div>
@@ -41,7 +54,11 @@ function RoomList() {
           />
           <div className="flex justify-between">
             <h2 className="text-lg font-semibold mb-2">Single Room</h2>
-            <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-0  rounded-md">Book</button>
+            <Link to={{
+               pathname: `room/type/${'Single'}`,
+            }}>
+            <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2  rounded-md">See More</button>
+            </Link>
           </div>
           <p className="text-gray-600 mb-2">Price: $600/night</p>
         </div>
@@ -53,7 +70,11 @@ function RoomList() {
           />
           <div className="flex justify-between">
             <h2 className="text-lg font-semibold mb-2">Kids Room</h2>
-            <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-0  rounded-md">Book</button>
+            <Link to={{
+               pathname: `room/type/${'Kids'}`,
+            }}>
+            <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2  rounded-md">See More</button>
+            </Link>
           </div>
           <p className="text-gray-600 mb-2">Price: $500/night</p>
         </div>

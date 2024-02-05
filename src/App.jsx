@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import RoomList from './pages/RoomList';
 import RoomDetails from './pages/RoomDetails';
 import UserProfile from './pages/UserProfile';
+import RoomType from './pages/RoomType';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/rooms" element={<RoomList />} />
+          <Route path="/room/type/:roomType" element={<RoomType />} />
           <Route path="/room/:roomId" element={<RoomDetails />} />
           <Route path="/profile" element={<UserProfile />} />
         </Routes>

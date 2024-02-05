@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     username: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirm_password: "",
   });
 
   const handleChange = (e) => {
@@ -18,14 +20,41 @@ const RegisterPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Form Data Submitted:", formData);
+  
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/v1/users/register/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        console.log('Registration successful');
+        setFormData({
+          username: "",
+          first_name: "",
+          last_name: "",
+          email: "",
+          password: "",
+          confirm_password: "",
+        });
+        console.log(response)
+      } else {
+        console.error('Registration failed');
+        console.error('Registration failed:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
+    console.log(formData)
   };
-
+  
   return (
-    <div className="flex h-screen bg-gray-200">
+    <div className="flex h-screen bg-gray-200 my-5">
       <div className="hidden lg:block lg:w-1/2">
         <img
           src={register}
@@ -53,6 +82,37 @@ const RegisterPage = () => {
                 required
               />
             </div>
+            <div className="flex justify-between">
+            <div className="mb-4">
+              <label htmlFor="first_name" className="block text-gray-600 mb-1">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-300 rounded-md"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="last_name" className="block text-gray-600 mb-1">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-300 rounded-md"
+                required
+              />
+            </div>
+            </div>
+          
 
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-600 mb-1">
@@ -90,9 +150,9 @@ const RegisterPage = () => {
               </label>
               <input
                 type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
+                id="confirm_password"
+                name="confirm_password"
+                value={formData.confirm_password}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded-md"
                 required
