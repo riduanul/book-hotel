@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import login from '../assets/images/login.avif'
+import loginImg from '../assets/images/login.avif'
 import { useState } from "react";
+import {useAuth} from "../context/AuthContext"
 
 const LoginPage = () => {
-
+  const {login} = useAuth()
   const [formData, setFormData] = useState({
     username :'',
     password :'',
@@ -21,19 +22,18 @@ const LoginPage = () => {
   const handleSubmit = async(e) =>{
     e.preventDefault();
     try{
-      const response = await fetch(`http://127.0.0.1:8000/api/v1/users/login/`,{
+      const response = await fetch(`https://book-hotel.onrender.com/api/v1/users/login/`,{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
-         
         },
         body: JSON.stringify(formData)
       })
 
       if(response.ok){
         const data = await response.json();
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user_id', data.user_id);
+        
+        login({user:data.user, token: data.token});
         console.log('Login successful')
         navigate('/');
       }
@@ -49,7 +49,7 @@ const LoginPage = () => {
     <div className="flex justify-center align-center">
      
       <div className="hidden lg:block lg:w-1/2  " >
-        <img src={login} alt="" />
+        <img src={loginImg} alt="" />
       </div>
 
     

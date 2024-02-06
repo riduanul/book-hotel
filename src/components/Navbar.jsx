@@ -1,9 +1,12 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 
 
 function Navbar() {
+  const { isAuthenticated, user,  logout } = useAuth();
+  console.log(user)
 const [isMobileOpen, setIsMobileOpen] = useState(false);
 
 const toggleMobileMenu = ()=>{
@@ -17,13 +20,11 @@ const handleLogout= async()=>{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
-        'Authorization': `{${localStorage.getItem('token')}, ${localStorage.getItem('user_id')}`
+        'Authorization': `{${localStorage.getItem('token')}, ${user}`
       }
     })
     if(response.ok){
-      console.log('clicked')
-      localStorage.removeItem('token')
-      localStorage.removeItem('user_id')
+      logout()
       console.log('logout successful');
       navigate('/login');
     }else{
@@ -39,14 +40,28 @@ const handleLogout= async()=>{
   <nav className="bg-gray-800 ">
     <div className="container flex justify-between items-center">
       <div className="text-white font-bold p-4">Book Hotel</div>
+      {isAuthenticated && (
+      <div className="welcome">
+        Welcome Mr. {user.user.first_name} {user.user.last_name}
+      </div>
+    )}
       {/* desktop view */}
       <div className=" hidden md:flex items-center space-x-4 text-white p-4">
           <a href="/" className="">Home</a>
-          <a href="/" className="">Rooms</a>
-          <a href="/" className="">Profile</a>
-          <a href="/login" className="">Login</a>
-          <button onClick={handleLogout} className="">Logout</button>
-          <a href="/register" className="">Register</a>
+          {isAuthenticated ? (
+          <>
+            <a href="/" className="">Rooms</a>
+            <a href="/" className="">Profile</a>
+            <button onClick={handleLogout} className="">Logout</button>
+          </>
+        ) : (
+          <>
+            <a href="/login" className="">Login</a>
+            <a href="/register" className="">Register</a>
+          </>
+        )}
+          
+         
       </div>
       {/* mobile view */}
       <div className="md:hidden">

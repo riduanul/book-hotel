@@ -15,7 +15,7 @@ function RoomDetails() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/v1/rooms/${roomId}/`)
+    fetch(`https://book-hotel.onrender.com/api/v1/rooms/${roomId}/`)
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(true);
