@@ -8,24 +8,26 @@ import { GrUserExpert } from "react-icons/gr";
 import { CgGym } from "react-icons/cg";
 import { GrMonitor } from "react-icons/gr";
 import { FaWifi } from "react-icons/fa6";
+import Loader from '../components/Loader.jsx';
+import { useAuth } from "../context/AuthContext.jsx";
 function RoomDetails() {
   const {roomId} = useParams()
   const [room, setRoom] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
+  const [isError, setIsError] = useState();
+  const {user, token} = useAuth();
   useEffect(() => {
+    setIsLoading(true);
     fetch(`https://book-hotel.onrender.com/api/v1/rooms/${roomId}/`)
       .then((res) => res.json())
       .then((data) => {
-        setIsLoading(true);
         setRoom(data);
         
         setIsLoading(false);
       })
       .catch((err) => {
         console.error(err);
-        setIsError(true);
+        setIsError(err);
       });
   }, [roomId]);
 
@@ -42,14 +44,44 @@ function RoomDetails() {
     setFormData({
       ...formData,
       // user:user,
-      room: room,
+      user: user.username,
+      room: room.room_number,
       [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Perform booking logic with formData
+    try {
+      const response = await fetch(
+        "https://book-hotel.onrender.com/api/v1/bookings/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+          body: JSON.stringify({
+            user:user.username,
+            room:room.room_number,
+            arrival_date: formData.arrivalDate,
+            departure_date: formData.departureDate,
+            adults: formData.adults,
+            children: formData.children,
+          }),
+        }
+      );
+      if (response.ok) {
+        console.log("Booking successful!");
+        // Handle success, e.g., show a success message, redirect, etc.
+      } else {
+        console.error("Booking failed:", response.statusText);
+        // Handle failure, e.g., show an error message to the user
+      }
+    } catch (error) {
+      console.error("Error during booking:", error);
+      // Handle error, e.g., show an error message to the user
+    }
     console.log('Booking Details:', formData);
     // You can add your booking logic here, for example, send a request to a server.
   };
@@ -57,7 +89,7 @@ function RoomDetails() {
 
   return (
     <div className="room w-[90%] mx-auto">
-      {isLoading? (<p>Loading...</p>):
+      {isLoading? (<div className="text-center"><Loader/></div>):
       isError? (<p>Error Occurred</p>):
       (
        <div className="flex flex-col md:flex-row justify-center my-5 gap-4">

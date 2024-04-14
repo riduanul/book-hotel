@@ -5,8 +5,8 @@ import { useAuth } from "../context/AuthContext";
 
 
 function Navbar() {
-  const { isAuthenticated, user,  logout } = useAuth();
-  console.log(user)
+  const { isAuthenticated, user,  token, logout } = useAuth();
+  console.log(isAuthenticated, token)
 const [isMobileOpen, setIsMobileOpen] = useState(false);
 
 const toggleMobileMenu = ()=>{
@@ -15,12 +15,11 @@ const toggleMobileMenu = ()=>{
 const navigate = useNavigate()
 const handleLogout= async()=>{
   try{
-    console.log('clicked')
-    const response = await fetch(`http://127.0.0.1:8000/api/v1/users/logout/`, {
+    const response = await fetch(`https://book-hotel.onrender.com/api/v1/users/logout/`, {
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
-        'Authorization': `{${localStorage.getItem('token')}, ${user}`
+        'Authorization': `{${localStorage.getItem('token')}, ${user}}`
       }
     })
     if(response.ok){
@@ -37,16 +36,10 @@ const handleLogout= async()=>{
 }
 
   return (
-  <nav className="bg-gray-800 ">
-    <div className="container flex justify-between items-center">
-      <div className="text-white font-bold p-4">Book Hotel</div>
-      {isAuthenticated && (
-      <div className="welcome">
-        Welcome Mr. {user.user.first_name} {user.user.last_name}
-      </div>
-    )}
-      {/* desktop view */}
-      <div className=" hidden md:flex items-center space-x-4 text-white p-4">
+  <nav className="container mx-auto fixed top-0 left-0 z-50">
+    <div className="flex justify-between align-center ">
+      <div className=" font-bold p-4">Book Hotel</div>
+      <div className=" hidden md:flex items-center space-x-4  p-4">
           <a href="/" className="">Home</a>
           {isAuthenticated ? (
           <>

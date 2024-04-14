@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import register from '../assets/images/register.webp'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -42,6 +42,7 @@ const RegisterPage = () => {
           password: "",
           confirm_password: "",
         });
+        Navigate('/login')
         console.log(response)
       } else {
         console.error('Registration failed');
@@ -54,7 +55,7 @@ const RegisterPage = () => {
   };
   
   return (
-    <div className="flex h-screen bg-gray-200 my-5">
+    <div className="flex h-screen  my-[120px]">
       <div className="hidden lg:block lg:w-1/2">
         <img
           src={register}
@@ -63,7 +64,7 @@ const RegisterPage = () => {
         />
       </div>
 
-      <div className="w-full lg:w-1/2 p-8 flex items-center justify-center">
+      <div className="w-full lg:w-1/2 p-8 flex items-center justify-center py-5">
         <div className="max-w-md w-full">
           <h2 className="text-3xl font-semibold mb-6">Register</h2>
 

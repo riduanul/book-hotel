@@ -19,23 +19,22 @@ const authReducer =(state, action)=>{
             token: action.payload.token
         };
         case 'LOGOUT':
-            return{
-                initialState,
-            };
+            return initialState;
         default:
             return state;
     }
 }
 
 export const AuthProvider = ({children}) =>{
-    const [state, dispatch] = useReducer(authReducer,initialState );
+    const [state, dispatch] = useReducer(authReducer, initialState);
 
-    const login = (user, token)=>{
+    const login = ({user, token}) => {
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', token);
-
-        dispatch({type: 'LOGIN', payload:{user, token}});
+        localStorage.setItem('token', JSON.stringify(token));
+    
+        dispatch({ type: 'LOGIN', payload: { user, token } });
     }
+    
     const logout = () =>{
         localStorage.removeItem('user');
         localStorage.removeItem('token');

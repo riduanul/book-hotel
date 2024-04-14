@@ -8,7 +8,7 @@ import RoomList from './pages/RoomList';
 import RoomDetails from './pages/RoomDetails';
 import UserProfile from './pages/UserProfile';
 import RoomType from './pages/RoomType';
-
+import PrivateRoute from './components/PrivateRoute';
 function App() {
   return (
     <Router>

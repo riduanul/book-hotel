@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import {  Link, useParams } from 'react-router-dom';
+import Loader from '../components/Loader.jsx';
+
+
 
 function RoomType() {
  const {roomType} = useParams()
@@ -9,10 +12,10 @@ function RoomType() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`https://book-hotel.onrender.com/api/v1/rooms/by_type/${roomType}/`)
       .then((res) => res.json())
       .then((data) => {
-        setIsLoading(true);
         setRooms(data);
         
         setIsLoading(false);
@@ -28,9 +31,11 @@ function RoomType() {
       <h1 className='text-xl md:text-2xl lg:text-3xl font-semibold text-center my-5'>{roomType} Rooms</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {isLoading ? (
-          <p>Loading...</p>
+           <div className='text-center mt-[200px] text-red-800 font-semibold'><Loader /></div>
+         
         ) : isError ? (
-          <p>Error Occurred</p>
+          <div className='text-center mt-[200px] text-red-800 font-semibold'><p>Error Occurred</p></div>
+          
         ) : (
           rooms?.map((room) => {
             return (
@@ -46,7 +51,7 @@ function RoomType() {
                     <button
                       className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2 rounded-md"
                     >
-                      Details
+                      Detail
                     </button>
                   </Link>
                 </div>

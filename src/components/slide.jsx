@@ -6,7 +6,7 @@ import image1 from '../assets/images/image-24.png';
 function slide() {
     const swiper = useSwiper();
   return (
-    <div className='text-center mb-8'>
+    <div className='text-center mb-8 '>
     <Swiper
    spaceBetween={50}
    slidesPerView={1}

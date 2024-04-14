@@ -32,7 +32,8 @@ const LoginPage = () => {
 
       if(response.ok){
         const data = await response.json();
-        
+        localStorage.setItem('token', JSON.stringify(data.token));
+        localStorage.setItem('user', JSON.stringify(data.user));
         login({user:data.user, token: data.token});
         console.log('Login successful')
         navigate('/');
